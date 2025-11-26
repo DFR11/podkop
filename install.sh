@@ -63,11 +63,11 @@ pkg_install() {
 
 update_config() {
     printf "\033[48;5;196m\033[1m╔══════════════════════════════════════════════════════════════════════╗\033[0m\n"
-    printf "\033[48;5;196m\033[1m║ ! Обнаружена старая версия podkop.                                   ║\033[0m\n"
-    printf "\033[48;5;196m\033[1m║ Если продолжите обновление, вам потребуется настроить Podkop заново. ║\033[0m\n"
-    printf "\033[48;5;196m\033[1m║ Старая конфигурация будет сохранена в /etc/config/podkop-070         ║\033[0m\n"
-    printf "\033[48;5;196m\033[1m║ Подробности: https://github.com/itdoginfo/podkop                     ║\033[0m\n"
-    printf "\033[48;5;196m\033[1m║ Точно хотите продолжить?                                             ║\033[0m\n"
+    printf "\033[48;5;196m\033[1m║ ! The detection of the old version of podkop.                                   BA\033[0m\n"
+    printf "\033[48;5;196m\033[1m║ If you continue with the upgrade, you will need to configure Podkop again. ║\033[0m\n"
+    printf "\033[48;5;196m\033[1m║ Old configuration will be saved in /etc/config/podkop-070 ║\033[0m\n"
+    printf "\033[48;5;196m\033[1m║ Details: https://github.com/itdoginfo/podkop ║\033[0m\n"
+    printf "\033[48;5;196m\033[1m║ Are you sure you want to continue?                                             ║\033[0m\n"
     printf "\033[48;5;196m\033[1m╚══════════════════════════════════════════════════════════════════════╝\033[0m\n"
 
     echo ""
@@ -187,7 +187,7 @@ main() {
                 pkg_remove luci-i18n-podkop*
                 pkg_install "$DOWNLOAD_DIR/$ru"
         else
-            msg "Русский язык интерфейса ставим? y/n (Need a Russian translation?)"
+            msg "Russian language interface? y/n (Need a Russian translation?)"
             while true; do
                 read -r -p '' RUS
                 case $RUS in
@@ -200,7 +200,7 @@ main() {
                     break
                     ;;
                 *)
-                    echo "Введите y или n"
+                    echo "Enter y or n"
                     ;;
                 esac
             done
@@ -218,9 +218,9 @@ check_system() {
     # Check OpenWrt version
     openwrt_version=$(cat /etc/openwrt_release | grep DISTRIB_RELEASE | cut -d"'" -f2 | cut -d'.' -f1)
     if [ "$openwrt_version" = "23" ]; then
-        msg "OpenWrt 23.05 не поддерживается начиная с podkop 0.5.0"
-        msg "Для OpenWrt 23.05 используйте podkop версии 0.4.11 или устанавливайте зависимости и podkop вручную"
-        msg "Подробности: https://podkop.net/docs/install/#%d1%83%d1%81%d1%82%d0%b0%d0%bd%d0%be%d0%b2%d0%ba%d0%b0-%d0%bd%d0%b0-2305"
+        msg "OpenWrt 23.05 is not supported since podkop 0.5.0"
+        msg "For OpenWrt 23.05 use podkop version 0.4.11 or install dependencies and podkop manually"
+        msg "Details: https://podkop.net/docs/install/#%d1%83%d1%81%d1%82%d0%b0%d0%bd%d0%be%d0%b2%d0%ba%d0%b0-%d0%bd%d0%b0-2305"
         exit 1
     fi
 
