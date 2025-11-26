@@ -1,0 +1,32 @@
+name: Translate Russian to English (Google)
+
+on:
+  workflow_dispatch: # 手动触发
+
+permissions:
+  contents: write # 必须赋予写权限
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies
+        run: pip install deep-translator
+
+      - name: Run Translation
+        run: python translate_ru.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add .
+          git commit -m "Translate RU to EN via Google Translate" || echo "No changes to commit"
+          git push
